@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<head>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Londrina+Shadow&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Road+Rage&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Londrina+Shadow&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Road+Rage&display=swap" rel="stylesheet">
+  <title>Kashf Imran</title>
+  <style>
+    body {
+      text-align: center;
+      background: url("https://www.publicdomainpictures.net/pictures/310000/nahled/muschel-schnecke-strand-meer.png");
+      background-size: cover;
+      background-position: center;
+      color: turquoise;
+      font-family: helvetica;
+      font-family: "Road Rage", serif;
+
+
+    }
+    p {
+      font-size: 22px;
+    }
+    input {
+      border: 0;
+      padding: 10px;
+      font-size: 18px;
+      font-family: "Outfit", sans-serif;
+    }
+    input[type="submit"] {
+	
+      background: pink;
+      color: turquoise;
+    }
+  </style>
+</head>
+<body>
+	
+
+	
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXXfbngY9jY2BFdKzyb5teqtoz6CMPOsvH3Q&s">
+  <p>Hi! I'm Kashf Imran!</p>
+  <input id="Name" type="name" placeholder="Your name">
+  <input id="Email" type="email" placeholder="Your email">
+  <input id="submit" type="submit">
+  
+  
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+	import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyAqaTj-92RAw8fhd2ckMb9rwFgTLajMuCM",
+      authDomain: "kashf-f90dc.firebaseapp.com",
+      projectId: "kashf-f90dc",
+      storageBucket: "kashf-f90dc.firebasestorage.app",
+      messagingSenderId: "853664993756",
+      appId: "1:853664993756:web:205ba70afeaa57401dbf19",
+      measurementId: "G-8X15X8Q4JE"
+
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+	const db = getDatabase(app);
+    
+const Name = document.querySelector("#Name") 
+const Email = document.querySelector("#Email")
+document.querySelector('#submit').addEventListener('click', Submit)
+	
+	function Submit() {
+	  const timestamp = buildTimestamp()
+	  
+	  set(ref(db, timestamp), {
+		  Name: Name.value,
+	      email: Email.value,
+	  });
+
+	  Name.value = ""
+	  Email.value = ""
+	}
+	
+	function buildTimestamp() {
+	  const now = new Date();
+	  let timestamp = now.getFullYear().toString() + "/";
+	  //const month = now.toLocaleString('default', { month: 'long' });
+
+	  let month = now.getMonth()+1   //add 1 because Javascript uses 0 for January
+	  month = month.toString()
+	  month = addLeadingZero(month)
+	  timestamp += month + "/"; 
+
+	  let date = now.getDate().toString()
+	  date = addLeadingZero(date)
+	  timestamp += date + "/";
+
+	  let hours = now.getHours().toString()
+	  hours = addLeadingZero(hours)
+	  timestamp += hours + ":";
+
+	  let minutes = now.getMinutes().toString()
+	  minutes = addLeadingZero(minutes)
+	  timestamp += minutes + ":";
+
+	  let seconds = now.getSeconds().toString()
+	  seconds = addLeadingZero(seconds)
+	  timestamp += seconds;
+  
+	  return timestamp
+	}
+	
+	function addLeadingZero(units) {
+		if (units.length < 2) {
+			units = "0" + units
+		}
+		return units
+	}
+
+	
+  </script>
+  
+</body>
