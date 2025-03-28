@@ -41,6 +41,7 @@
   <p>Hi! I'm Kashf Imran!</p>
   <input id="Name" type="name" placeholder="Your name">
   <input id="Email" type="email" placeholder="Your email">
+  <input id="Age" type="age" placeholder="Your Age">
   <input id="submit" type="submit">
   
   
@@ -70,6 +71,7 @@
     
 const Name = document.querySelector("#Name") 
 const Email = document.querySelector("#Email")
+const Age = document.querySelector("#Age")
 document.querySelector('#submit').addEventListener('click', Submit)
 	
 	function Submit() {
@@ -78,10 +80,13 @@ document.querySelector('#submit').addEventListener('click', Submit)
 	  set(ref(db, timestamp), {
 		  Name: Name.value,
 	      email: Email.value,
+		  Age: Age.value,
 	  });
 
 	  Name.value = ""
 	  Email.value = ""
+	  Age.value = ""
+	  
 	}
 	
 	function buildTimestamp() {
